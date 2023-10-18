@@ -12,10 +12,11 @@ if page == "Open Issues":
     
     # Add an issue
     issue = st.text_input("Add an Issue:")
-    if st.button("Add"):
+    if st.button("Add Issue"):
         if issue:
             issues.append(issue)
-
+            st.text(f"Added Issue: {issue}")
+    
     # Display open issues
     st.subheader("Issues:")
     for i, issue in enumerate(issues):
@@ -27,9 +28,10 @@ elif page == "To-Do's":
     
     # Add a to-do
     todo = st.text_input("Add a To-Do:")
-    if st.button("Add"):
+    if st.button("Add To-Do"):
         if todo:
             todos.append(todo)
+            st.text(f"Added To-Do: {todo}")
 
     # Display to-do list
     st.subheader("To-Do List:")
