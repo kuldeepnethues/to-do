@@ -1,8 +1,13 @@
 import streamlit as st
+import pandas as pd
+
+# Load data from CSV files
+issues_df = pd.read_csv("issues.csv", header=None, names=["Issue"])
+todos_df = pd.read_csv("todos.csv", header=None, names=["ToDo"])
 
 # Initialize state for issues and todos
-issues = []
-todos = []
+issues = issues_df["Issue"].tolist()
+todos = todos_df["ToDo"].tolist()
 
 # Page selection
 page = st.sidebar.selectbox("Select a Page", ["Open Issues", "To-Do's"])
@@ -39,4 +44,9 @@ elif page == "To-Do's":
         if st.checkbox(f"{i + 1}. {todo}", key=f"todo_{i}"):
             todos.remove(todo)
 
-# Display the app
+# Save data to CSV files
+issues_df = pd.DataFrame({"Issue": issues})
+issues_df.to_csv("issues.csv", index=False, header=False)
+
+todos_df = pd.DataFrame({"ToDo": todos})
+todos_df.to_csv("todos.csv", index=False, header=False)
