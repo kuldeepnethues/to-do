@@ -31,7 +31,7 @@ if page == "Open Issues":
         st.write(f"{i + 1}. {issue}")
         
         # Add a discussion button
-        if st.button(f"Open Discussion for Issue {i + 1}"):
+        if st.button("Discuss"):
             discussion = st.text_area("Add a comment:")
             if st.button("Add Comment"):
                 if i not in issue_discussions:
@@ -40,8 +40,15 @@ if page == "Open Issues":
                 st.text(f"Added Comment: {discussion}")
         
         # Mark Solved button
-        if st.button(f"Mark Solved for Issue {i + 1}"):
-            issues.remove(issue)
+        if st.button("Mark Solved"):
+            issue = "~~" + issue + "~~"
+            st.text(f"Marked Issue as Solved: {issue}")
+
+        # Display comments for the issue
+        if i in issue_discussions:
+            st.subheader("Comments:")
+            for j, comment in enumerate(issue_discussions[i]):
+                st.write(f"Comment {j + 1}: {comment}")
 
 elif page == "To-Do's":
     st.title("To-Do's")
@@ -60,7 +67,8 @@ elif page == "To-Do's":
         
         # Mark Solved button
         if st.button(f"Mark Solved for To-Do {i + 1}"):
-            todos.remove(todo)
+            todos[i] = "~~" + todos[i] + "~~"
+            st.text(f"Marked To-Do as Solved: {todos[i]}")
 
 # Save data to CSV files
 issues_df = pd.DataFrame({"Issue": issues})
