@@ -1,6 +1,13 @@
 import streamlit as st
 import pandas as pd
 
+# strike down a text
+def strike(text):
+    result = ''
+    for c in text:
+        result = result + c + '\u0336'
+    return result
+
 # Load data from CSV files
 issues_df = pd.read_csv("issues.csv", header=None, names=["Issue"])
 todos_df = pd.read_csv("todos.csv", header=None, names=["ToDo"])
@@ -26,7 +33,7 @@ if page == "Open Issues":
     st.subheader("Issues:")
     for i, issue in enumerate(issues):
         if st.checkbox(f"{i + 1}. {issue}", key=f"issue_{i}"):
-            issues.remove(issue)
+            strike(issue)
 
 elif page == "To-Do's":
     st.title("To-Do's")
