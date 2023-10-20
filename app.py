@@ -33,7 +33,7 @@ if page == "Open Issues":
     st.subheader("Issues:")
     for i, issue in enumerate(issues):
         if st.checkbox(f"{i + 1}. {issue}", key=f"issue_{i}"):
-            strike(issue)
+            issues[i] = strike(issue)
 
 elif page == "To-Do's":
     st.title("To-Do's")
